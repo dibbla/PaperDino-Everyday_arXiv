@@ -12,6 +12,7 @@ function fetchURL(){
     console.log("fetchURL button clicked!")
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs=>{
         let url = tabs[0].url;
+        let tab_key = tabs[0].title;
         console.log("Succuessfully fetched url as type: ",typeof(url));
 
         // Save the new url
@@ -27,10 +28,8 @@ function fetchURL(){
             }
             // If url is new, save. Else alert the url exists
             if(flag){
-                var time = new Date();
-                var item_stamp = String(time.toLocaleDateString() + " - " + time.toLocaleTimeString())
                 // Asynchronous call back, the url store operation will be done here
-                chrome.storage.sync.set({ [item_stamp] : url }, function(){
+                chrome.storage.sync.set({ [tab_key] : url }, function(){
                     console.log("Url saved to sync ", url)
                 });
             }

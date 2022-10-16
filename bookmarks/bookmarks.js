@@ -1,10 +1,19 @@
+function generate_content(key,url){
+    var arXiv = /arxiv\.org\/abs\/[0-9]{4}\.[0-9]{5}/
+
+    if(arXiv.test(url)){
+        document.body.innerHTML += "<a href=\"" + val + "\">" +key + "</a>" + "<br"
+    }
+}
+
 function list_all_bookmarks(){
     var content = ""
     chrome.storage.sync.get(null, function(all){
-        for(const [key, val] of Object.entries(all)){
-            console.log(val)
-            document.getElementById("t").innerHTML += val
-            document.getElementById("t").innerHTML += "<br>"
+        for([key, val] of Object.entries(all)){
+            // console.log(val)
+            generate_content(key,val)
+
+
         }
     })
 }
