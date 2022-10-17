@@ -23,9 +23,19 @@ function fetchURL(){
                 if(String(val[0])==String(url)){
                     flag = false
                     console.log("find the same! Enum exit, with flag = "+flag);
+                    alert("url already svaed")
                     break;
                 }
             }
+
+            // We don't save non academic url
+            var arXiv = /arxiv\.org\/abs\/[0-9]{4}\.[0-9]{5}/
+            var arXiv_pdf = /arxiv\.org\/pdf\/[0-9]{4}\.[0-9]{5}\.pdf/
+            if((!arXiv.test(url))&&(!arXiv_pdf.test(url))){
+                flag = false
+                alert("Be academic!")
+            }
+
             // If url is new, save. Else alert the url exists
             if(flag){
                 var time = new Date()
@@ -36,9 +46,6 @@ function fetchURL(){
                 chrome.storage.sync.set({ [tab_key] : info }, function(){
                     console.log("Url saved to sync ", info)
                 });
-            }
-            else{
-                alert("This url is already saved")
             }
         })
     })
