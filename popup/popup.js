@@ -20,7 +20,7 @@ function fetchURL(){
             var flag = true;
             for(const [key, val] of Object.entries(all)){
                 console.log("Before saving, we have: "+key+" "+val);
-                if(String(val)==String(url)){
+                if(String(val[0])==String(url)){
                     flag = false
                     console.log("find the same! Enum exit, with flag = "+flag);
                     break;
@@ -28,9 +28,12 @@ function fetchURL(){
             }
             // If url is new, save. Else alert the url exists
             if(flag){
+                var time = new Date()
+                var time_stamp = time.toLocaleDateString()
+                var info = [url,time_stamp]
                 // Asynchronous call back, the url store operation will be done here
-                chrome.storage.sync.set({ [tab_key] : url }, function(){
-                    console.log("Url saved to sync ", url)
+                chrome.storage.sync.set({ [tab_key] : info }, function(){
+                    console.log("Url saved to sync ", info)
                 });
             }
             else{

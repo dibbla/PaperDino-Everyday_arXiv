@@ -1,18 +1,20 @@
-function generate_content(key,url){
+function arXiv_to_arXiv_pdf(url){
+    return "arxiv.org/pdf/" + url.substring(22) + ".pdf"
+}
+
+function generate_content(key,info){
     var arXiv = /arxiv\.org\/abs\/[0-9]{4}\.[0-9]{5}/
     var arXiv_pdf = /arxiv\.org\/pdf\/[0-9]{4}\.[0-9]{5}\.pdf/
 
-    console.log("Now checking: ",url)
+    console.log("Now checking: ",info)
 
-    if(arXiv.test(url)){
-        document.body.innerHTML += "<p><a href=\"" + url + "\">" +key + "</a></p>" + "<br>"
+    if(arXiv.test(info[0])){
+        document.body.innerHTML += "<p><a href=\"" + info[0] + "\">" +key + "</a>  "+arXiv_to_arXiv_pdf(info[0])+"</p>" + "<br>"
         console.log("1st passed")
     }
-    else{
-        if(arXiv_pdf.test(url)){
-            document.body.innerHTML += "<p><a href=\"" + url + "\">" + "[pdf]" +key + "</a></p>" + "<br>"
-            console.log("2nd passed")
-        }
+    if(arXiv_pdf.test(info[0])){
+        document.body.innerHTML += "<p><a href=\"" + info[0] + "\">" + "[pdf]" +key + "</a></p>" + "<br>"
+        console.log("2nd passed")
     }
 }
 
