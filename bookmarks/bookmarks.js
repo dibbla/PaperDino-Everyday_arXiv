@@ -2,6 +2,10 @@ function arXiv_to_arXiv_pdf(url){
     return "arxiv.org/pdf/" + url.substring(22) + ".pdf"
 }
 
+// function arXiv_pdf_to_arXiv(url){
+    // request for title
+// }
+
 function generate_content(info){
     var arXiv = /arxiv\.org\/abs\/[0-9]{4}\.[0-9]{5}/
     var arXiv_pdf = /arxiv\.org\/pdf\/[0-9]{4}\.[0-9]{5}\.pdf/
@@ -9,7 +13,7 @@ function generate_content(info){
     console.log("Now checking: ",info)
 
     if(arXiv.test(info[1][0])){
-        document.body.innerHTML += "<p><a href=\"" + info[1][0] + "\">" + info[0] + "</a>  "+arXiv_to_arXiv_pdf(info[0])+"</p>" + "<br>"
+        document.body.innerHTML += "<p><a href=\"" + info[1][0] + "\">" + info[0] + "</a>  "+ "<a href=\"https://" + arXiv_to_arXiv_pdf(info[1][0])+"\">"+"PDF"+"</a>"+"</p>" + "<br>"
         console.log("1st passed")
     }
     if(arXiv_pdf.test(info[1][0])){
@@ -38,7 +42,7 @@ function list_all_bookmarks(){
         current_date = date_arr[0][1][2]
 
         document.body.innerHTML += "<h2>"+current_date+"</h2>"
-        
+
         for([key,val] of Object.entries(date_arr)){
             console.log(val[1][2])
             if(val[1][2]!=current_date){
