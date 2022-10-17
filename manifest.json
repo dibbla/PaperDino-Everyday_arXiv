@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Read it later",
-    "description": "Save and organize papers/paper URLs for reading later",
-    "version": "0.2",
+    "name": "Everyday arXiv",
+    "description": "Save and organize papers/paper URLs for reading later and EVERYDAY",
+    "version": "0.3",
     "action": {
       "default_popup": "popup/popup.html",
       "default_icon": "images/Hi_icon.png"

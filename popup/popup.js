@@ -29,8 +29,9 @@ function fetchURL(){
             // If url is new, save. Else alert the url exists
             if(flag){
                 var time = new Date()
-                var time_stamp = time.toLocaleDateString()
-                var info = [url,time_stamp]
+                var time_stamp = time.getTime()
+                var time_date = time.toDateString()
+                var info = [url,time_stamp,time_date]
                 // Asynchronous call back, the url store operation will be done here
                 chrome.storage.sync.set({ [tab_key] : info }, function(){
                     console.log("Url saved to sync ", info)
