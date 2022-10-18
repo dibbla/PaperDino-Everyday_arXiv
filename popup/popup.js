@@ -23,7 +23,7 @@ function fetchURL(){
                 if(String(val[0])==String(url)){
                     flag = false
                     console.log("find the same! Enum exit, with flag = "+flag);
-                    alert("url already svaed")
+                    alert("Url already saved")
                     break;
                 }
             }

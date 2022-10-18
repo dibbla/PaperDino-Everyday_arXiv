@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Everyday arXiv",
     "description": "Save and organize papers/paper URLs for reading later and EVERYDAY",
-    "version": "0.3",
+    "version": "0.4",
     "action": {
       "default_popup": "popup/popup.html",
       "default_icon": "images/Hi_icon.png"

@@ -1,0 +1,35 @@
+html {
+    background: #d6d4d1;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: initial;
+}
+
+h1 {
+    text-align: center;
+    font-family: "Lucida Calligraphy", cursive, serif, sans-serif;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    width: 50em;
+    margin: 0 auto;
+    padding: 2em;
+    border: 1em solid #d7c5b0;
+    border-radius: 1em;
+    background-color: #d7c5b0;
+}
+
+a:link {
+    color: #795a2e;    
+}
+a:visited {
+    color: rgb(86, 49, 7);
+}
+a{
+    font-size: 1.5em;
+}

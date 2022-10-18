@@ -13,7 +13,7 @@ function generate_content(info){
     console.log("Now checking: ",info)
 
     if(arXiv.test(info[1][0])){
-        document.body.innerHTML += "<p><a href=\"" + info[1][0] + "\">" + info[0] + "</a>  "+ "<a href=\"https://" + arXiv_to_arXiv_pdf(info[1][0])+"\">"+"PDF"+"</a>"+"</p>" + "<br>"
+        document.body.innerHTML += "<p><a href=\"" + info[1][0] + "\">" + info[0] + "</a>  "+ "<a href=\"https://" + arXiv_to_arXiv_pdf(info[1][0])+"\">"+"<i>PDF</i>"+"</a>"+"</p>" + "<br>"
         console.log("1st passed")
     }
     if(arXiv_pdf.test(info[1][0])){
@@ -36,7 +36,7 @@ function list_all_bookmarks(){
             date_arr.push([key,val])
         }
 
-        date_arr.sort(aux_sort)
+        date_arr.sort(aux_sort).reverse()
         console.log(date_arr)
 
         current_date = date_arr[0][1][2]
