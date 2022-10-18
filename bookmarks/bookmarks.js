@@ -64,7 +64,7 @@ function list_all_bookmarks(){
         for([key,val] of Object.entries(date_arr)){
             console.log(val[1][2])
             if(val[1][2]!=current_date){
-                document.body.innerHTML += "<h2>"+current_date+"</h2>"
+                document.body.innerHTML += "<h2>"+val[1][2]+"</h2>"
                 current_date = val[1][2]
             }
 
