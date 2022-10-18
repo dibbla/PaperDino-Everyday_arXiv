@@ -35,7 +35,7 @@ function list_all_bookmarks(){
         for([key, val] of Object.entries(all)){
             date_arr.push([key,val])
         }
-
+        // date_arr.push(['[1901.10902] Test: Transfer and Exploration via the Information Bottleneck',['https://arxiv.org/abs/1901.10903', 1566077401269, 'Mon Oct 17 2022']]) // This line just for testing
         date_arr.sort(aux_sort).reverse()
         console.log(date_arr)
 
