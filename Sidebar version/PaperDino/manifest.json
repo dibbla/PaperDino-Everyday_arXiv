@@ -1,0 +1,28 @@
+{
+    "name": "PaperDino",
+    "description": "Base Level Extension for Paper Trace",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+      "default_icon": "images/Hi_icon.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+          "matches": ["http://*/*","https://*/*"],
+          "js": ["content.js"],
+          "css": ["sidebar/sidebar.css"],
+          "run_at": "document_start"
+        }
+      ],
+    "permissions": [
+        "activeTab",
+        "tabs"
+    ],
+    "web_accessible_resources": [{
+        "resources": ["/sidebar/sidebar.html","/sidebar/sidebar.css","/sidebar/icon128.png"],
+        "matches": ["<all_urls>"]
+    }]
+  }
