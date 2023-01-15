@@ -19,7 +19,8 @@
       ],
     "permissions": [
         "activeTab",
-        "tabs"
+        "tabs",
+        "storage"
     ],
     "web_accessible_resources": [{
         "resources": ["/sidebar/sidebar.html","/sidebar/sidebar.css","/sidebar/icon128.png"],
