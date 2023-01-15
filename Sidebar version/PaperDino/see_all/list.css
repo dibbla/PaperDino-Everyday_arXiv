@@ -1,0 +1,56 @@
+body {
+    background-image: linear-gradient(to right , #e9e9ff, #ddffea);
+}
+
+.info{
+    background-image: linear-gradient(to right , #e8fdf9, #fcf1ff);
+    font-size: 1.5em;
+    width: 40%;
+    margin: 10px auto;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.07em;
+    padding-bottom: 0.07em;
+    border-radius: 0.7em;
+}
+.info:hover {
+    box-shadow: 5px 0px 20px rgba(31, 31, 31, 0.2);
+}
+
+.greetings{
+    font-size: 1.5em;
+    width: 40%;
+    margin: 10px auto;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.07em;
+    padding-bottom: 0.07em;
+}
+
+.date{
+    font-style: oblique;
+    font-size: 1.5em;
+    width: 40%;
+    margin: 10px auto;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.07em;
+    padding-bottom: 0.07em;
+}
+
+.comments{
+    /* modified from https://zhuanlan.zhihu.com/p/476545697 */
+    --background:linear-gradient(to right,rgb(65, 63, 128),#60ada8 70%,rgb(87, 122, 177));
+    --font-color:linear-gradient(to right,rgba(112, 18, 120, 0.589),rgb(20, 20, 198),rgb(76, 61, 215));
+    display: inline-block;
+    font-size:var(--font-size);
+    font-weight: bold;
+    padding: calc(var(--font-size) * 0.25);
+    background:var(--font-color),var(--background);
+    -webkit-background-clip: text,border-box;
+    -webkit-text-fill-color: transparent;
+    background-clip: text,border-box;
+    color: transparent;
+    --background:transparent!important;
+}
+

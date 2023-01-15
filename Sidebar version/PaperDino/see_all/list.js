@@ -1,12 +1,12 @@
 function generate_content_piece(info, index){
     // Info for saving: [paper url, Paper Name, timestamp, comments, datestring]
     let piece = ""
-    piece += "<div id="+index+">\n"
+    piece += "<div class=\"info\">\n"
     piece += "<p>\n"
     piece += "<b>" + info[1][1] + "</b>"
     piece += "<a href=" + info[0] + "> URL</a><br>"
     if(info[1][3]!=""){
-        piece += info[1][3]
+        piece += "<b class=\"comments\">Comment:</b> " + info[1][3]
     }
     piece += "</p>\n"
     piece += "</div>\n"
@@ -33,7 +33,7 @@ function list_all(){
         for (let i = 0; i < date_arr.length; i++) {
             if(current_date != date_arr[i][1][4]){
                 current_date = date_arr[i][1][4]
-                document.body.innerHTML += "<p>" + current_date + "</p>"
+                document.body.innerHTML += "<p class=\"date\"><b>" + current_date + "</b></p>"
             }
             let content_piece = generate_content_piece(date_arr[i], i)
             document.body.innerHTML += content_piece

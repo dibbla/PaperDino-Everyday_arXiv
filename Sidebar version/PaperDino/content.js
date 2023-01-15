@@ -13,22 +13,23 @@ function startFunction(){
   // behaviour at the begining of page loading
   if(arXiv_info_filter.test(document.URL)||
      arXiv_pdf_filter.test(document.URL))
-  fetch(chrome.runtime.getURL('/sidebar/sidebar.html')).then(r => r.text()).then(html => {
-    // sidebar init
-    sidebarHTML = html
-    document.body.insertAdjacentHTML('beforeend',sidebarHTML);
-    original_margin = document.body.style.marginLeft
-    sidebar_arr = document.getElementsByClassName("sidebar");
-    if(sidebarFlag==false){
-      sidebar_arr[0].style.visibility = "hidden"
-    }
+    fetch(chrome.runtime.getURL('/sidebar/sidebar.html')).then(r => r.text()).then(html => {
+      // sidebar init
+      sidebarHTML = html
+      document.body.insertAdjacentHTML('beforeend',sidebarHTML);
+      original_margin = document.body.style.marginLeft
+      sidebar_arr = document.getElementsByClassName("PaperDino-sidebar");
+      if(sidebarFlag==false){
+        sidebar_arr[0].style.visibility = "hidden"
+      }
 
-    // fetch btn init
-    fetch_btn = document.getElementById("fetch-paper")
-    fetch_btn.onclick = fetchPaper
-    seeall_btn = document.getElementById("seeall")
-    seeall_btn.onclick = seeall
-  });
+      // fetch btn init
+      fetch_btn = document.getElementById("fetch-paper")
+      fetch_btn.onclick = fetchPaper
+      seeall_btn = document.getElementById("seeall")
+      seeall_btn.onclick = seeall
+  })
+  else{}
 }
 
 function fetchPaper(){
@@ -64,7 +65,7 @@ function fetchPaper(){
       var result = xmlHttp.responseText
       var title_start_index = result.indexOf("<title>") + 7
       var title_end_index = result.lastIndexOf("</title>")
-      var paper_name = "[" + url.substring(22,32)+"] " + result.substring(title_start_index,title_end_index)
+      var paper_name = "[" + url.substring(22,32)+"] " + result.substring(title_start_index,title_end_index) + "(pdf)"
       console.log("Finding: ",title_start_index,title_end_index,result.substring(title_start_index,title_end_index))
     }
     catch(e){

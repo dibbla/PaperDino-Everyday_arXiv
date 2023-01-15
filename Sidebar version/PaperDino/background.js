@@ -9,7 +9,7 @@ chrome.action.onClicked.addListener(() => {
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
       if (request.greeting == "seeall"){
-        chrome.tabs.create({"url":"see_all/list.html"})
+        chrome.tabs.create({"url":"see_all/list_bookmarks.html"})
       }
     }
   );
