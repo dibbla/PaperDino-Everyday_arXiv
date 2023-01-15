@@ -11,8 +11,9 @@ var arXiv_pdf_filter = /arxiv\.org\/pdf\/[0-9]{4}\.[0-9]{5}\.pdf/
 function startFunction(){
   // for api request
   // behaviour at the begining of page loading
+  if(arXiv_info_filter.test(document.URL)||
+     arXiv_pdf_filter.test(document.URL))
   fetch(chrome.runtime.getURL('/sidebar/sidebar.html')).then(r => r.text()).then(html => {
-    
     // sidebar init
     sidebarHTML = html
     document.body.insertAdjacentHTML('beforeend',sidebarHTML);
@@ -25,7 +26,8 @@ function startFunction(){
     // fetch btn init
     fetch_btn = document.getElementById("fetch-paper")
     fetch_btn.onclick = fetchPaper
-
+    seeall_btn = document.getElementById("seeall")
+    seeall_btn.onclick = seeall
   });
 }
 
@@ -86,7 +88,6 @@ function fetchPaper(){
         break;
       }
     }
-
     // If url is new, save. Else alert the url exists
     if(flag){
       // Asynchronous call back, the url store operation will be done here
@@ -97,13 +98,20 @@ function fetchPaper(){
   })
 }
 
-
 // for pre-load sidebar
 window.addEventListener('DOMContentLoaded', function () {
-  console.log('window.addEventListener');
-  startFunction();
+  console.log('window.addEventListener')
+  startFunction()
 });
 
+function seeall(){
+  // it shall send message to background.js so that chrome API can be called
+  (async () => {
+    const response = await chrome.runtime.sendMessage({greeting: "seeall"});
+    // do something with response here, not outside the function
+    console.log(response);
+  })();
+}
 
 // for sidebar toggle
 chrome.runtime.onMessage.addListener(
