@@ -134,7 +134,8 @@ chrome.runtime.onMessage.addListener(
       }
     }
     else{
-      alert("PaperDino only eats academic url or pdf file")
+      seeall()
+      // alert("PaperDino only eats academic url or pdf file")
     }
     if (request.sidebarStat == "on")
       sendResponse({farewell: "get"});
