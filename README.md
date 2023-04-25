@@ -1,4 +1,4 @@
-# PaperDino-Everyday_arXiv :smiley_cat:
+# PaperDino-Everyday_arXiv 🦖
 
 Hi! :+1: PaperDino-Everyday_arXiv contains two different Chrome Extensions with similar core implementation. These extensions trace your daily paper read. You may mark some paper for reading later or mark the paper (with comments) for future review.
 
