@@ -46,23 +46,11 @@ function list_all(){
             console.log("Key-val: ", key, val)
         }
 
-        // generate 10 different test data with different dates
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google", 1610000000000, "This is a comment", "2021-01-07"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-1", 1610000000222, "This is a comment", "2021-01-08"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-2", 1610000000333, "This is a comment", "2021-01-09"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-3", 1610000000444, "This is a comment", "2021-01-10"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-4", 1610000000555, "This is a comment", "2021-01-11"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-5", 1610000000666, "This is a comment", "2021-01-12"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-6", 1610000000777, "This is a comment", "2021-01-13"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-7", 1610000000888, "This is a comment", "2021-01-13"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-8", 1610000000999, "This is a comment", "2021-01-14"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-9", 1610000001000, "This is a comment", "2021-01-14"]])
-
         date_arr.sort(auxilary_sort)
         console.log(date_arr)
 
         let current_date = ""
-        console.log(date_arr)
+        // console.log(date_arr)
         for (let i = 0; i < date_arr.length; i++) {
             if(current_date != date_arr[i][1][4]){
                 current_date = date_arr[i][1][4]
@@ -75,11 +63,11 @@ function list_all(){
         // render the first page
         renderCurrentPage(currentPage)
         renderPagination()
-        console.log(divs)
     })
 }
 
 function renderCurrentPage(page){
+    // console.log("rendering page: ", page)
     // clear the main page, then put the corresponding divs in
     document.getElementById("pagination").innerHTML = ""
 
@@ -91,10 +79,9 @@ function renderCurrentPage(page){
     document.getElementById("pagination").appendChild(date_p)
     current_date = divs[(page-1)*divsPerPage][1]
 
-    for(let i = (page-1)*divsPerPage; i < page*divsPerPage; i++){
-        console.log("checking date",divs[i][1], current_date)
-        console.log("checking date",typeof(divs[i][1]), typeof(current_date))
-        if(divs[i][1]!==current_date){
+    for(let i = (page-1)*divsPerPage; i < Math.min(page*divsPerPage,divs.length); i++){
+        if(divs[i] == undefined) break
+        if((divs[i][1]!==current_date)&&(divs[i] != undefined)){
             // creat p element for date
             let date_p = document.createElement("p")
             date_p.setAttribute("class", "date")
@@ -110,26 +97,31 @@ function renderCurrentPage(page){
 
 let page_btns = []
 
-function renderPagination(){
-    // set up multiple buttons for switching pages
-    let numPages = Math.ceil(divs.length/divsPerPage)
-    for(let i = 1; i <= numPages; i++){
-        let button = document.createElement("button")
-        button.setAttribute("class", "page-btn")
-        button.textContent = i
-        button.addEventListener("click", function(){
-            currentPage = i
-            for(i = 0; i < page_btns.length; i++){
-                page_btns[i].setAttribute("class", "page-btn")
-            }
-            button.setAttribute("class", "page-btn current-page")
-            renderCurrentPage(currentPage)
-        })
-        page_btns.push(button)
+function renderPagination() {
+    const numPages = Math.ceil(divs.length / divsPerPage);
+    const pageBtnsContainer = document.getElementById("page-btns");
+    const pageBtns = [];
+  
+    for (let i = 1; i <= numPages; i++) {
+      const button = document.createElement("button");
+      button.classList.add("page-btn");
+      button.textContent = i;
+      button.addEventListener("click", function () {
+        console.log("clicked page: ", i);
+        currentPage = i;
+  
+        for (let j = 0; j < pageBtns.length; j++) {
+          pageBtns[j].classList.remove("current-page");
+        }
+  
+        button.classList.add("current-page");
+        renderCurrentPage(currentPage);
+      });
+  
+      pageBtns.push(button);
+      pageBtnsContainer.appendChild(button);
     }
-    for(let i = 0; i < page_btns.length; i++){
-        document.getElementById("page-btns").appendChild(page_btns[i])
-    }
-}
+  }
+  
 
 window.onload = list_all
