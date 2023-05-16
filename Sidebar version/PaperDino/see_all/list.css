@@ -3,6 +3,7 @@ body {
 }
 
 .info{
+    font-family: DejaVu Sans Mono, monospace;
     background-image: linear-gradient(to right , #e8fdf9, #fcf1ff);
     font-size: 1.5em;
     width: 40%;
@@ -28,6 +29,8 @@ body {
 }
 
 .date{
+    font-family: OCR A Std, monospace;
+    font-weight: bold;
     font-style: oblique;
     font-size: 1.5em;
     width: 40%;
@@ -54,3 +57,39 @@ body {
     --background:transparent!important;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+.page-btn {
+    font-family: OCR A Std, monospace;
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    border: none;
+    background-color: transparent;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 40px; /* Fixed width */
+    height: 40px; /* Fixed height */
+    border-radius: 50%; 
+
+    transition: background-color 0.3s;
+    user-select: none;
+}
+
+.current-page {
+    background: linear-gradient(#6ddbef 0%, #a6c7ef 100%); /* Replace with your desired gradient colors */
+    /* adjust transparency */
+    opacity: 0.5;
+    color: #FFFFFF; /* Replace with your desired text color */
+    border-radius: 50%;
+}
+
+.page-btn:hover {
+    color: #FFFFFF; /* Replace with your desired hover text color */
+    border-radius: 50%;
+}
+  
