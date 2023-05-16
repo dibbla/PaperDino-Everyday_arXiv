@@ -32,7 +32,7 @@ function auxilary_sort(a,b){
     return - (a[1][2] - b[1][2])
 }
 
-const divsPerPage = 2; // Number of divs to display per page
+const divsPerPage = 10; // Number of divs to display per page
 let divs = []; // Array to store dynamically generated divs
 let currentPage = 1; // Track the current page number
 
