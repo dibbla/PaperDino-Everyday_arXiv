@@ -56,7 +56,7 @@ function list_all(){
         date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-6", 1610000000777, "This is a comment", "2021-01-13"]])
         date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-7", 1610000000888, "This is a comment", "2021-01-13"]])
         date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-8", 1610000000999, "This is a comment", "2021-01-14"]])
-        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-9", 1610000000000, "This is a comment", "2021-01-14"]])
+        date_arr.push(["https://www.google.com", ["https://www.google.com", "Google-9", 1610000001000, "This is a comment", "2021-01-14"]])
 
         date_arr.sort(auxilary_sort)
         console.log(date_arr)
@@ -66,20 +66,70 @@ function list_all(){
         for (let i = 0; i < date_arr.length; i++) {
             if(current_date != date_arr[i][1][4]){
                 current_date = date_arr[i][1][4]
-                // document.body.innerHTML += "<p class=\"date\"><b>" + current_date + "</b></p>"
-                divs.push([])
             }
-            
             let content_piece = generate_content_piece(date_arr[i], i)
-            divs[divs.length-1].push(content_piece)
-            document.getElementById("pagination").appendChild(content_piece)
+            divs.push([content_piece, current_date])
+            // document.getElementById("pagination").appendChild(content_piece[0])
         }
-        
+
+        // render the first page
+        renderCurrentPage(currentPage)
+        renderPagination()
         console.log(divs)
     })
 }
 
-function renderPagination(){
+function renderCurrentPage(page){
+    // clear the main page, then put the corresponding divs in
+    document.getElementById("pagination").innerHTML = ""
 
+    let current_date = ""
+    // creat p element for date
+    let date_p = document.createElement("p")
+    date_p.setAttribute("class", "date")
+    date_p.textContent = divs[(page-1)*divsPerPage][1]
+    document.getElementById("pagination").appendChild(date_p)
+    current_date = divs[(page-1)*divsPerPage][1]
+
+    for(let i = (page-1)*divsPerPage; i < page*divsPerPage; i++){
+        console.log("checking date",divs[i][1], current_date)
+        console.log("checking date",typeof(divs[i][1]), typeof(current_date))
+        if(divs[i][1]!==current_date){
+            // creat p element for date
+            let date_p = document.createElement("p")
+            date_p.setAttribute("class", "date")
+            date_p.textContent = divs[i][1]
+            document.getElementById("pagination").appendChild(date_p)
+            current_date = divs[i][1]
+        }
+        if(divs[i] != undefined){
+            document.getElementById("pagination").appendChild(divs[i][0])
+        }
+    }
 }
+
+let page_btns = []
+
+function renderPagination(){
+    // set up multiple buttons for switching pages
+    let numPages = Math.ceil(divs.length/divsPerPage)
+    for(let i = 1; i <= numPages; i++){
+        let button = document.createElement("button")
+        button.setAttribute("class", "page-btn")
+        button.textContent = i
+        button.addEventListener("click", function(){
+            currentPage = i
+            for(i = 0; i < page_btns.length; i++){
+                page_btns[i].setAttribute("class", "page-btn")
+            }
+            button.setAttribute("class", "page-btn current-page")
+            renderCurrentPage(currentPage)
+        })
+        page_btns.push(button)
+    }
+    for(let i = 0; i < page_btns.length; i++){
+        document.getElementById("page-btns").appendChild(page_btns[i])
+    }
+}
+
 window.onload = list_all
