@@ -7,6 +7,7 @@ var fetch_btn
 // Supported url patterns are listed here
 var arXiv_info_filter = /arxiv\.org\/abs\/[0-9]{4}\.[0-9]{5}/
 var arXiv_pdf_filter = /arxiv\.org\/pdf\/[0-9]{4}\.[0-9]{5}\.pdf/
+var pubmed_filter = /pubmed\.ncbi\.nlm\.nih\.gov\/[0-9]{8}/
 
 function startFunction(){
   // for api request
@@ -72,6 +73,9 @@ function fetchPaper(){
       alert("PaperDino Fail to use arXiv API QAQ. PDF number stored")
     }
   }
+  else if(pubmed_filter.test(url)){
+    var paper_name = document.title
+  }
 
   // construct information for save
   // Info for saving: [paper url, Paper Name, timestamp, comments, datestring]
@@ -122,7 +126,7 @@ chrome.runtime.onMessage.addListener(
     let url = document.URL
     // url filter
     // Please modify this if more sites to be added
-    if(arXiv_info_filter.test(url)||arXiv_pdf_filter.test(url)){
+    if(arXiv_info_filter.test(url)||arXiv_pdf_filter.test(url)||pubmed_filter.test(url)){
       // toggle to show/hide sidebar
       if(sidebarFlag==false){
         document.body.style.marginLeft = original_margin
