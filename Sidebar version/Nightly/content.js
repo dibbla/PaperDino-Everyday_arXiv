@@ -13,7 +13,7 @@ function startFunction(){
   // for api request
   // behaviour at the begining of page loading
   if(arXiv_info_filter.test(document.URL)||
-     arXiv_pdf_filter.test(document.URL))
+     arXiv_pdf_filter.test(document.URL)||pubmed_filter.test(document.URL))
     fetch(chrome.runtime.getURL('/sidebar/sidebar.html')).then(r => r.text()).then(html => {
       // sidebar init
       sidebarHTML = html
