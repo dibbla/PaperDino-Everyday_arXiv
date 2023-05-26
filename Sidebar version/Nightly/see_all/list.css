@@ -92,4 +92,14 @@ body {
     color: #FFFFFF; /* Replace with your desired hover text color */
     border-radius: 50%;
 }
-  
+
+/* make the CSS for dot class */
+/* make dot  lower*/
+.dot{
+    font-family: OCR A Std, monospace;
+    font-style: oblique;
+    font-size: 1.5em;
+    user-select: none;
+    padding-top: 7px;
+    text-align: center;
+}

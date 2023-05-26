@@ -32,7 +32,7 @@ function auxilary_sort(a,b){
     return - (a[1][2] - b[1][2])
 }
 
-const divsPerPage = 10; // Number of divs to display per page
+const divsPerPage = 3; // Number of divs to display per page
 let divs = []; // Array to store dynamically generated divs
 let currentPage = 1; // Track the current page number
 
@@ -113,13 +113,47 @@ function renderPagination() {
         for (let j = 0; j < pageBtns.length; j++) {
           pageBtns[j].classList.remove("current-page");
         }
-  
+        
         button.classList.add("current-page");
         renderCurrentPage(currentPage);
-      });
-  
-      pageBtns.push(button);
-      pageBtnsContainer.appendChild(button);
+        // empty the page-btns div, then render the new page buttons
+        pageBtnsContainer.innerHTML = ""
+        renderPagination();
+    });
+      
+      if(i == 1){
+        pageBtns.push(button);
+        pageBtnsContainer.appendChild(button);
+      }
+      else if(i==numPages){
+        pageBtns.push(button);
+        pageBtnsContainer.appendChild(button);
+      }
+      else if(Math.abs(i-currentPage) <= 3){
+        pageBtns.push(button);
+        pageBtnsContainer.appendChild(button);
+      }
+      else{
+        pageBtns.push(button);
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        dot.textContent = "...";
+        // count the number of dots
+        let num_dots = 0
+        for(let j = 0; j < pageBtns.length; j++){
+            if(pageBtns[j].textContent == "..."){
+                num_dots += 1
+            }
+        }
+        if(num_dots == 0){
+            pageBtnsContainer.appendChild(dot);
+        }
+        // if previous button is a dot, don't add another dot
+        else if((pageBtns[pageBtns.length-1].textContent != "...")&&(num_dots<2)){
+            pageBtnsContainer.appendChild(dot);
+        }
+
+      }
     }
   }
   
