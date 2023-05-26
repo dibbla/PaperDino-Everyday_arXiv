@@ -7,6 +7,8 @@ var fetch_btn
 // Supported url patterns are listed here
 var arXiv_info_filter = /arxiv\.org\/abs\/[0-9]{4}\.[0-9]{5}/
 var arXiv_pdf_filter = /arxiv\.org\/pdf\/[0-9]{4}\.[0-9]{5}\.pdf/
+var nips_pdf = /papers\.nips\.cc\/paper\/[0-9]{4}\/file\/[0-9a-zA-Z\-]+-Paper\.pdf/
+var nips_info = /papers\.nips\.cc\/paper\/[0-9]{4}\/hash\/[0-9a-zA-Z\-]+-Abstract\.html/
 
 function startFunction(){
   // for api request
@@ -72,7 +74,14 @@ function fetchPaper(){
       alert("PaperDino Fail to use arXiv API QAQ. PDF number stored")
     }
   }
-
+  else if(nips_info.test(url)){
+    // nips pdf
+    var paper_name = document.title
+  }
+  else if(nips_pdf.test(url)){
+    // nips pdf
+    var paper_name = document.title + "(pdf)"
+  }
   // construct information for save
   // Info for saving: [paper url, Paper Name, timestamp, comments, datestring]
   var comments = document.getElementById("comment").value
@@ -122,7 +131,12 @@ chrome.runtime.onMessage.addListener(
     let url = document.URL
     // url filter
     // Please modify this if more sites to be added
-    if(arXiv_info_filter.test(url)||arXiv_pdf_filter.test(url)){
+    if(
+       arXiv_info_filter.test(url)
+     ||arXiv_pdf_filter.test(url)
+     ||nips_pdf.test(url)
+     ||nips_info.test(url)
+     ){
       // toggle to show/hide sidebar
       if(sidebarFlag==false){
         document.body.style.marginLeft = original_margin
