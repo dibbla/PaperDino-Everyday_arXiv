@@ -66,6 +66,9 @@ function list_all(){
     })
 }
 
+let visible_page_btns = []
+const visible_page_range = 4
+
 function renderCurrentPage(page){
     // console.log("rendering page: ", page)
     // clear the main page, then put the corresponding divs in
@@ -103,23 +106,74 @@ function renderPagination() {
     const pageBtns = [];
   
     for (let i = 1; i <= numPages; i++) {
-      const button = document.createElement("button");
-      button.classList.add("page-btn");
-      button.textContent = i;
-      button.addEventListener("click", function () {
-        console.log("clicked page: ", i);
-        currentPage = i;
-  
-        for (let j = 0; j < pageBtns.length; j++) {
-          pageBtns[j].classList.remove("current-page");
+
+        visible_page_btns.push(i)
+
+        const button = document.createElement("button");
+        button.classList.add("page-btn");
+        button.textContent = i;
+        button.addEventListener("click", function () {
+            console.log("clicked page: ", i);
+            currentPage = i;
+
+            for (let j = 0; j < pageBtns.length; j++) {
+                pageBtns[j].classList.remove("current-page");
+            }
+
+            button.classList.add("current-page");
+            renderCurrentPage(currentPage);
+
+            // conpute the visible page btns, only the first page, last page and the pages within 2 pages of the current page are visible
+            console.log("visible page btns: ", visible_page_btns, "current page: ", currentPage)
+            visible_page_btns = []
+            visible_page_btns.push(1)
+            for (let i = 1; i <= numPages; i++) {
+                if((Math.abs(i-currentPage)<=visible_page_range)&&(visible_page_btns.indexOf(i)==-1)){
+                    visible_page_btns.push(i)
+                }
+            }
+            if (visible_page_btns.indexOf(numPages)==-1){
+                visible_page_btns.push(numPages)
+            }
+            console.log("visible page btns: ", visible_page_btns, "current page: ", currentPage)
+
+            // only show the visible page btns
+            for (let i = 0; i < pageBtns.length; i++) {
+                if(visible_page_btns.indexOf(i+1)==-1){
+                    pageBtns[i].style.display = "none"
+                }
+                else{
+                    pageBtns[i].style.display = "flex"
+                }
+            }
+        });
+
+        pageBtns.push(button);
+        pageBtnsContainer.appendChild(button);
+    }
+
+    // conpute the visible page btns, only the first page, last page and the pages within 2 pages of the current page are visible
+    console.log("visible page btns: ", visible_page_btns, "current page: ", currentPage)
+    visible_page_btns = []
+    visible_page_btns.push(1)
+    for (let i = 1; i <= numPages; i++) {
+        if((Math.abs(i-currentPage)<=visible_page_range)&&(visible_page_btns.indexOf(i)==-1)){
+            visible_page_btns.push(i)
         }
-  
-        button.classList.add("current-page");
-        renderCurrentPage(currentPage);
-      });
-  
-      pageBtns.push(button);
-      pageBtnsContainer.appendChild(button);
+    }
+    if (visible_page_btns.indexOf(numPages)==-1){
+        visible_page_btns.push(numPages)
+    }
+    console.log("visible page btns: ", visible_page_btns, "current page: ", currentPage)
+    
+    // only show the visible page btns
+    for (let i = 0; i < pageBtns.length; i++) {
+        if(visible_page_btns.indexOf(i+1)==-1){
+            pageBtns[i].style.display = "none"
+        }
+        else{
+            pageBtns[i].style.display = "flex"
+        }
     }
   }
   
